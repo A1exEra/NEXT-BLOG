@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import Hero from '@/components/homePage/Hero';
+import FeaturedPosts from '@/components/homePage/FeaturedPosts';
 export default function Home() {
   return (
     <>
@@ -9,6 +11,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>This is the NEXT-BLOG APP</h1>
+      <Hero />
+      <FeaturedPosts />
     </>
   );
 }
