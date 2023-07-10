@@ -2,8 +2,6 @@ import Head from 'next/head';
 import Hero from '@/components/homePage/Hero';
 import FeaturedPosts from '@/components/homePage/FeaturedPosts';
 import { getFeaturedPosts } from '@/helpers/posts-util';
-// import { POST } from '@/helpers/types';
-import { POSTS } from '@/helpers/POSTS';
 export default function Home(props: any) {
   return (
     <>

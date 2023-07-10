@@ -1,6 +1,6 @@
 import AllPosts from '@/components/posts/AllPosts';
-import { POSTS } from '@/helpers/POSTS';
 import { getAllPosts } from '@/helpers/posts-util';
+import { Head } from 'next/document';
 const AllPostPage = (props: any) => {
   return (
     <div>

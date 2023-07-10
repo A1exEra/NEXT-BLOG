@@ -1,13 +1,65 @@
 import { styled } from 'styled-components';
 import PostHeader from './PostHeader';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import Image from 'next/image';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 const PostContent = (props: any) => {
   console.log(props);
   const imagePath = `/images/posts/${props.post.slug}/${props.post.image}`;
+
+  const customRenderers = {
+    p(paragraph: { children?: any; node?: any }) {
+      const { node } = paragraph;
+      if (node.children[0].tagName === 'img') {
+        const image = node.children[0];
+        return (
+          <div className="image">
+            <Image
+              src={`/images/posts/${props.post.slug}/${image.properties.src}`}
+              alt={image.properties.alt}
+              width={600}
+              height={300}
+            />
+          </div>
+        );
+      }
+      return <p>{paragraph.children}</p>;
+    },
+    // code(code: { language: any; value: any }) {
+    //   const { language, value } = code;
+    //   return (
+    //     <SyntaxHighlighter
+    //       style={atomDark}
+    //       language={language}
+    //       children={value}
+    //     />
+    //   );
+    // },
+    // code({ node, inline, className, children, ...props }) {
+    //   const match = /language-(\w+)/.exec(className || '');
+    //   return !inline && match ? (
+    //     <SyntaxHighlighter
+    //       children={String(children).replace(/\n$/, '')}
+    //       style={atomDark}
+    //       language={match[1]}
+    //       PreTag="div"
+    //       {...props}
+    //     />
+    //   ) : (
+    //     <code className={className} {...props}>
+    //       {children}
+    //     </code>
+    //   );
+    // },
+  };
+
   return (
     <StyledContent>
       <PostHeader title={props.post.title} image={imagePath} />
-      <ReactMarkdown>{props.post.content}</ReactMarkdown>
+      <ReactMarkdown components={customRenderers}>
+        {props.post.content}
+      </ReactMarkdown>
     </StyledContent>
   );
 };
