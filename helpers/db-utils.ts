@@ -1,7 +1,14 @@
 import { MongoClient, SortDirection } from 'mongodb';
 require('dotenv').config();
+// env: {
+//     mongodb_username: 'godOfcode',
+//     mongodb_password: 'ILR66swnSHRcd6A2',
+//     mongodb_clustername: 'cluster0',
+//     mongodb_database: 'devdomination',
+//   },
+const connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.pqxxq5k.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`;
 export const connectDatabase = async () => {
-  const client = await MongoClient.connect(`${process.env.MONGO_URL}`);
+  const client = await MongoClient.connect(connectionString);
   return client;
 };
 export const insertDocument = async (
