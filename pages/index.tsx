@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Hero from '@/components/homePage/Hero';
 import FeaturedPosts from '@/components/homePage/FeaturedPosts';
-export default function Home() {
+import { getFeaturedPosts } from '@/helpers/posts-util';
+export default function Home(props: any) {
   return (
     <>
       <Head>
@@ -10,9 +11,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>This is the NEXT-BLOG APP</h1>
       <Hero />
-      <FeaturedPosts />
+      <FeaturedPosts posts={props.posts} />
     </>
   );
 }
+
+export const getStaticProps = () => {
+  const FeaturedPosts = getFeaturedPosts();
+
+  return {
+    props: {
+      posts: FeaturedPosts,
+    },
+    revalidate: 1800,
+  };
+};
