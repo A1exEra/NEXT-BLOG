@@ -1,12 +1,11 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
-// import sandro from '@/public/images/site/sandro.jpeg';
 const Hero = () => {
   return (
     <StyledHero>
       <div className="image">
         <Image
-          src="/images/site/sandro.jpeg"
+          src="/images/site/sandro.jpg"
           width={300}
           height={300}
           alt="an image of me"
