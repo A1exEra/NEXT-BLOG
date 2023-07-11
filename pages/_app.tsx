@@ -2,7 +2,6 @@ import '@/styles/globals.scss';
 import { ThemeProvider } from 'styled-components';
 import theme from '@/styles/theme';
 import { NotificationContextProvider } from '@/store/notificationContext';
-// import { GlobalStyles } from '@/styles/globalStyles';
 import type { AppProps } from 'next/app';
 import Layout from '@/components/layout/Layout';
 import Head from 'next/head';

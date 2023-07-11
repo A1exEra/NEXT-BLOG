@@ -2,12 +2,6 @@ import { styled } from 'styled-components';
 import PostHeader from './PostHeader';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import Image from 'next/image';
-// import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-// import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark';
-// import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
-// import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
-// SyntaxHighlighter.registerLanguage('js', js);
-// SyntaxHighlighter.registerLanguage('css', css);
 const PostContent = (props: any) => {
   const imagePath = `/images/posts/${props.post.slug}/${props.post.image}`;
 
@@ -29,32 +23,6 @@ const PostContent = (props: any) => {
       }
       return <p>{paragraph.children}</p>;
     },
-    // code(code: { language: any; value: any }) {
-    //   const { language, value } = code;
-    //   return (
-    //     <SyntaxHighlighter
-    //       style={atomDark}
-    //       language={language}
-    //       children={value}
-    //     />
-    //   );
-    // },
-    // code({ node, inline, className, children, ...props }) {
-    //   const match = /language-(\w+)/.exec(className || '');
-    //   return !inline && match ? (
-    //     <SyntaxHighlighter
-    //       children={String(children).replace(/\n$/, '')}
-    //       style={atomDark}
-    //       language={match[1]}
-    //       PreTag="div"
-    //       {...props}
-    //     />
-    //   ) : (
-    //     <code className={className} {...props}>
-    //       {children}
-    //     </code>
-    //   );
-    // },
   };
 
   return (
