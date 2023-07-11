@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 const PostContent = (props: any) => {
-  console.log(props);
   const imagePath = `/images/posts/${props.post.slug}/${props.post.image}`;
 
   const customRenderers = {

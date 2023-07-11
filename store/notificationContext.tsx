@@ -1,16 +1,28 @@
-import { useState, createContext, useEffect } from 'react';
+import { useState, createContext, useEffect, ReactNode } from 'react';
 
-const NotificationContext = createContext({
+interface NotificationData {
+  status: string;
+  title: string;
+  message: string;
+}
+interface NotificationContextProps {
+  notification: NotificationData | null;
+  setNotification: (notificationData: NotificationData | null) => void;
+  hideNotification: () => void;
+}
+
+const NotificationContext = createContext<NotificationContextProps>({
   notification: null,
   setNotification: function (notificationData) {},
   hideNotification: function () {},
 });
 
-export const NotificationContextProvider = (props) => {
-  const [notification, setNotification] = useState(null);
+export const NotificationContextProvider = (props: { children: ReactNode }) => {
+  const [notification, setNotification] = useState<NotificationData | null>(
+    null
+  );
 
   useEffect(() => {
-    console.log({ notification });
     if (notification && notification.status !== 'pending') {
       const timer = setTimeout(() => setNotification(null), 3000);
       return () => {

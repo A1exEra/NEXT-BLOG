@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { styled, css } from 'styled-components';
 import { useContext } from 'react';
 import NotificationContext from '@/store/notificationContext';
 import ReactDOM from 'react-dom';
@@ -9,30 +9,19 @@ const Notification = (props: {
 }) => {
   const { title, message, status } = props;
   const notificationCtx = useContext(NotificationContext);
-  let statusClasses = '';
 
-  if (status === 'success') {
-    statusClasses = 'success';
-  }
-
-  if (status === 'error') {
-    statusClasses = 'error';
-  }
-  if (status === 'pending') {
-    statusClasses = 'pending';
-  }
   return ReactDOM.createPortal(
     <StyledNotification
-      className={`${statusClasses}`}
+      status={status}
       onClick={notificationCtx!.hideNotification}>
       <h2>{title}</h2>
       <p>{message}</p>
     </StyledNotification>,
-    document.getElementById('notifications')
+    document.getElementById('notifications') as Element
   );
 };
 
-const StyledNotification = styled.div`
+const StyledNotification = styled.div<{ status: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,17 +44,26 @@ const StyledNotification = styled.div`
   p {
     margin: 0;
   }
-  &: .success {
-    background-color: ${({ theme }) => theme.colors.success500};
-    color: ${({ theme }) => theme.colors.grey800};
-  }
 
-  &: .error {
-    background-color: ${({ theme }) => theme.colors.error500};
-  }
-  &: .pending {
-    background-color: #177cbe;
-  }
+  ${({ status }) =>
+    status === 'success' &&
+    css`
+      background-color: ${({ theme }) => theme.colors.success500};
+      color: ${({ theme }) => theme.colors.grey800};
+    `}
+
+  ${({ status }) =>
+    status === 'error' &&
+    css`
+      background-color: ${({ theme }) => theme.colors.error500};
+    `}
+      
+      ${({ status }) =>
+    status === 'pending' &&
+    css`
+      background-color: ${({ theme }) => theme.colors.primary300};
+    `}
+
   @media (min-width: 768px) {
     width: 40rem;
     left: calc(50% - 20rem);
@@ -73,4 +71,5 @@ const StyledNotification = styled.div`
     border-top-left-radius: 6px;
   }
 `;
+
 export default Notification;

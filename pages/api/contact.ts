@@ -4,7 +4,6 @@ import { connectDatabase, insertDocument } from '@/helpers/db-utils';
 import { MESSAGE } from '@/helpers/types';
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    console.log(req.body);
     const { email, name, message } = req.body;
     if (
       !email ||
